@@ -295,7 +295,8 @@ export class ChunkingUploader extends EventEmitter {
 
         if (!isTransaction) {
             const hash = await deephash;
-            const sigBytes = Buffer.from(await this.currencyConfig.getSigner().sign(hash));
+            // @ts-ignore @metaplex-foundation/js compatibillity.
+            const sigBytes = Buffer.from((await this.currencyConfig.getSigner().sign(hash)).signature);
 
             heldChunk.set(sigBytes, 2); // tx will be the first part of the held chunk.
 

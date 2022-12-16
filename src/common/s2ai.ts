@@ -210,7 +210,8 @@ export default class StreamToAsyncIterator<T = unknown>
         this._stream.removeListener("error", this._handleStreamError);
 
         this._state = STATES.ended;
-        this._stream.destroy(err);
+        // Don't work with @metaplex-foundation/js 0.17.11
+        // this._stream.destroy(err);
     }
 
     private _handleStreamError(err: Error): void {
